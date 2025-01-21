@@ -1,0 +1,11 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 1000,
+  "jsxBracketSameLine": false,
+  "proseWrap": "always",
+  "bracketSpacing": true,
+  "arrayBracketNewline": "always",
+  "objectCurlyNewline": "always",
+  "tabWidth": 2
+}
