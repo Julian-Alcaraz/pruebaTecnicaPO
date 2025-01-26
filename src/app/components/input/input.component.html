@@ -1,0 +1,6 @@
+<label [for]="name" class="label">{{ label }}</label>
+<br />
+<input type="text" class="input" [id]="name" [placeholder]="placeholder" [formControl]="control" />
+<div *ngIf="hasError" class="error-text">
+  <app-input-error [errors]="control.errors"></app-input-error>
+</div>

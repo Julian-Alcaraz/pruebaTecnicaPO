@@ -1,0 +1,9 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* margin: -10px; */
+}
+.row > * {
+    margin: 0px 10px; /* Ajusta el espaciado entre los elementos */
+}

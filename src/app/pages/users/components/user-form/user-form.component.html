@@ -1,0 +1,18 @@
+<form [formGroup]="userForm" (submit)="editUser ? editar() : agregar()">
+  <div class="row">
+    <app-input name="nombre" label="Nombre" placeholder="Ej: Pepe" [control]="inputControl('nombre')"></app-input>
+    <app-input name="apellido" label="Apellido" placeholder="Ej: Perez" [control]="inputControl('apellido')"></app-input>
+    <app-input name="email" label="Email" placeholder="Ej: ejemplo@gmail.com" [control]="inputControl('email')"></app-input>
+    <div>
+      <label class="" for="rol">User Rol</label><br />
+      <select name="" id="rol" class="input">
+        <option value="" disabled selected>Seleccione un rol</option>
+        <option value="">Admin</option>
+        <option value="">User</option>
+        <!-- <option value=""></option> -->
+      </select>
+    </div>
+  </div>
+  <br />
+  <button type="submit">Guardar</button>
+</form>

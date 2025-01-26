@@ -1,0 +1,11 @@
+.input {
+  padding: 7px 10px;
+}
+.label {
+  margin: 2px 10px;
+}
+.error-text {
+  color: red;
+  font-size: small;
+  padding: 5px 0px 0px 10px;
+}
