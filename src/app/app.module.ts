@@ -9,17 +9,23 @@ import { ROOT_REDUCER } from './store/state/app.state';
 import { CommonComponentsModule } from './components/common-components.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { UserModule } from './pages/users/user.module';
+import { UsersService } from './services/users.service';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { UsersEffects } from './store/effects/users.effects';
 
 @NgModule({
   declarations: [AppComponent, ErrorComponent],
   imports: [
     //
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(ROOT_REDUCER),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
     CommonComponentsModule,
-    UserModule
+    UserModule,
+    EffectsModule.forRoot([UsersEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,13 +1,16 @@
-<p>users works!</p>
 <div>
-    <h1>nuevo usuario</h1>
-    <app-user-form></app-user-form>
+  <button type="button" (click)="showNewUser()">{{ !showForm ? 'Nuevo Usuario' : 'Cerrar' }}</button>
+</div>
+<div *ngIf="showForm">
+  <h1>Nuevo usuario</h1>
+  <app-user-form></app-user-form>
+</div>
+<div *ngIf="user">
+  <h1>Editar usuario</h1>
+  <button type="button" (click)="cancelEdit()">Cancelar</button>
+  <app-user-form [editUser]="user"></app-user-form>
 </div>
 <div>
-    <h1>Editar usuario</h1>
-    <app-user-form></app-user-form>
-</div>
-<div>
-    <h1>Lista de usuarios</h1>
-    <app-user-list></app-user-list>
+  <h1>Lista de usuarios</h1>
+  <app-user-list (editUser)="editUser($event)"></app-user-list>
 </div>

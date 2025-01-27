@@ -1,1 +1,16 @@
-<p>user-list works!</p>
+<div *ngIf="loading$ | async; else loaded">cargado...</div>
+
+<ng-template #loaded>
+  <!-- <div *ngIf="users.length > 0; else noUsers">  -->
+  <div *ngIf="(users$ | async | json).length > 0; else noUsers">
+    <div *ngFor="let user of users$ | async; let i = index">
+      {{ i }}:{{ user.nombre }} id: @ {{ user.id }} @
+      <button type="button" (click)="eliminar(user.id)">Eliminar</button>
+      <button type="button" (click)="editar(user)">editar</button>
+      <br />
+    </div>
+  </div>
+  <ng-template #noUsers>
+    <div>no hay usuarios</div>
+  </ng-template>
+</ng-template>

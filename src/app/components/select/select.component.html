@@ -1,0 +1,9 @@
+<label [for]="name" class="label">{{ label }}</label>
+<br />
+<select class="input" [name]="name" [id]="name" [formControl]="control">
+  <option value="" disabled selected>Select one</option>
+  <option *ngFor="let opt of options" [value]="opt.toLowerCase()">{{ opt }}</option>
+</select>
+<div *ngIf="hasError" class="error-text">
+  <app-input-error [errors]="control.errors"></app-input-error>
+</div>
