@@ -9,6 +9,10 @@
       <button type="button" (click)="editar(user)">editar</button>
       <br />
     </div>
+    <button (click)="before()">anterior</button>
+    pagina: {{ currentPage$ | async }}
+    <button (click)="next()">siguiente</button>
+    cant pages: {{ totalPages$ | async }}
   </div>
   <ng-template #noUsers>
     <div>no hay usuarios</div>

@@ -10,14 +10,14 @@ export const addedUser = createAction('[User] Added User', props<{ user: User }>
 export const addUserFailure = createAction('[User] Create User Failure', props<{ error: any }>());
 
 export const updateUser = createAction('[User] Update User', props<{ user: User }>());
-
 export const updateUserSuccess = createAction('[User] Update User Success', props<{ user: User }>());
-
 export const updateUserFailure = createAction('[User] Update User Failure', props<{ error: any }>());
 
 // // Eliminar usuario
 export const deleteUser = createAction('[User] Delete User', props<{ userId: number }>());
-
 export const deletedUser = createAction('[User] Deleted User', props<{ userId: number }>());
-
 export const deleteUserFailure = createAction('[User] Delete User Failure', props<{ error: any }>());
+
+// paginacion
+export const nextPage = createAction('[User] Next Page', props<{ nextPage: number }>());
+export const previusPage = createAction('[User] Previus Page', props<{ previusPage: number }>());
