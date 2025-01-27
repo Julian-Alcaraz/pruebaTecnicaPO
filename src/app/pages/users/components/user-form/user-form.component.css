@@ -6,3 +6,9 @@
 .row > * {
   margin: 0px 10px;
 }
+.errorMessage {
+  color: red;
+}
+.successMessage {
+  color: green;
+}

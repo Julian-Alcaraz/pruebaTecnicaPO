@@ -1,7 +1,6 @@
 <div *ngIf="loading$ | async; else loaded">cargado...</div>
 
 <ng-template #loaded>
-  <!-- <div *ngIf="users.length > 0; else noUsers">  -->
   <div *ngIf="(users$ | async | json).length > 0; else noUsers">
     <div *ngFor="let user of users$ | async; let i = index">
       {{ i }}:{{ user.nombre }} id: @ {{ user.id }} @

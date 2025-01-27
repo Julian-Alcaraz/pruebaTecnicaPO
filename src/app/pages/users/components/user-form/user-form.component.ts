@@ -1,8 +1,11 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/interfaces/user.interface';
 import { addUser, updateUser } from 'src/app/store/actions/users.actions';
+import { selectAddError, selectAddSuccess, selectLoadingUserAdd, selectLoadingUserUpdate, selectUpdateError, selectUpdateSuccess } from 'src/app/store/selectors/users.selector';
+import { AppState } from 'src/app/store/state/app.state';
 // import * as UserActions from 'src/app/store/actions/users.actions';
 
 @Component({
@@ -18,13 +21,26 @@ export class UserFormComponent implements OnInit {
     email: ['', [Validators.required]],
     rol: ['', [Validators.required]],
   });
+  public loading$: Observable<boolean> = new Observable();
+  public error$: Observable<any> = new Observable();
+  public success$: Observable<any> = new Observable();
+  private destroy$ = new Subject<void>();
+  message: string = '';
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
   ngOnInit() {
     if (this.editUser) {
+      this.loading$ = this.store.select(selectLoadingUserUpdate).pipe(takeUntil(this.destroy$));
+      this.error$ = this.store.select(selectUpdateError).pipe(takeUntil(this.destroy$));
+      // this.success$ = this.store.select(selectUpdateSuccess).pipe(takeUntil(this.destroy$));
       this.userForm.patchValue(this.editUser);
+    } else {
+      this.loading$ = this.store.select(selectLoadingUserAdd).pipe(takeUntil(this.destroy$));
+      this.error$ = this.store.select(selectAddError).pipe(takeUntil(this.destroy$));
+      // this.success$ = this.store.select(selectAddSuccess).pipe(takeUntil(this.destroy$));
     }
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -32,26 +48,28 @@ export class UserFormComponent implements OnInit {
       this.userForm.patchValue(this.editUser);
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   get inputControl(): (input: string) => FormControl {
     return (input: string) => this.userForm.get(input) as FormControl;
   }
+
   editar() {
-    console.log('editar');
     if (!this.userForm.valid) {
       this.userForm.markAllAsTouched();
     } else {
-      console.log('eDITAR es valido', this.userForm.value);
       this.store.dispatch(updateUser({ user: { ...this.userForm.value, id: this.editUser!.id } }));
     }
   }
-  agregar() {
-    // this.store.dispatch(UserActions.addUser({ user: { id: 1,apellido:'asdasd', nombre: 'John Doe', email: 'john.doe@example.com' ,rol:'admin' } }));
 
+  agregar() {
     if (!this.userForm.valid) {
       this.userForm.markAllAsTouched();
-      console.log('agregar Tiene errores');
     } else {
-      console.log('agregar es valido', this.userForm.value);
       this.store.dispatch(addUser({ user: this.userForm.value }));
     }
   }

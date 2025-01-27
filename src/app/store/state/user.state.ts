@@ -4,6 +4,9 @@ export interface UsersState {
   loading: boolean;
   users: ReadonlyArray<User>;
   error: any;
+  errorAdd: any;
+  errorUpdate: any;
+  errorDelete: any;
   loadingAdd: boolean;
   loadingUpdate: boolean;
   loadingDelete: boolean;

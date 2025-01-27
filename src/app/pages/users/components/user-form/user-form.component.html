@@ -7,4 +7,14 @@
   </div>
   <br />
   <button type="submit">Guardar</button>
+  {{ loading$ | async }}
+  {{ message }}
+  <div *ngIf="message" [class]="(error$ | async) ? 'errorMessage' : 'successMessage'">{{ message }}</div>
+  <div *ngIf="error$ | async as error">
+    <p class="errorMessage">{{ error }}</p>
+  </div>
+  <div *ngIf="success$ | async">
+    <p class="successMessage">Usuario agregado/actualizado con éxito</p>
+  </div>
+  <div *ngIf="loading$ | async">cargando...</div>
 </form>

@@ -5,6 +5,9 @@ export const initialState: UsersState = {
   loading: false,
   users: [],
   error: null,
+  errorAdd: null,
+  errorUpdate: null,
+  errorDelete: null,
   loadingAdd: false,
   loadingDelete: false,
   loadingUpdate: false,
@@ -47,6 +50,7 @@ export const usersReducer = createReducer(
     const updatedUsers = state.users.map((elem) => (elem.id === user.id ? { ...elem, ...user } : elem));
     return { ...state, users: updatedUsers, loadingUpdate: false };
   }),
+  // paginator
   on(UserActions.nextPage, (state, { nextPage }) => {
     return { ...state, currentPage: nextPage };
   }),
@@ -54,13 +58,24 @@ export const usersReducer = createReducer(
     return { ...state, currentPage: previusPage };
   }),
   // error
-  on(UserActions.addUserFailure, UserActions.loadedUsersFailure, UserActions.deleteUserFailure, UserActions.updateUserFailure, (state, { error }) => ({
-    // agregar las otras
+  on(UserActions.loadedUsersFailure, (state, { error }) => ({
     ...state,
-    error: error,
     loading: false,
+    error,
+  })),
+  on(UserActions.addUserFailure, (state, { error }) => ({
+    ...state,
     loadingAdd: false,
+    errorAdd: error,
+  })),
+  on(UserActions.deleteUserFailure, (state, { error }) => ({
+    ...state,
     loadingDelete: false,
+    errorDelete: error,
+  })),
+  on(UserActions.updateUserFailure, (state, { error }) => ({
+    ...state,
     loadingUpdate: false,
+    errorUpdate: error,
   })),
 );
