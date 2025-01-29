@@ -13,7 +13,8 @@ import { UsersService } from './services/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './store/effects/users.effects';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [AppComponent, ErrorComponent],
   imports: [
@@ -25,7 +26,9 @@ import { UsersEffects } from './store/effects/users.effects';
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
     CommonComponentsModule,
     UserModule,
-    EffectsModule.forRoot([UsersEffects])
+    EffectsModule.forRoot([UsersEffects]),
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

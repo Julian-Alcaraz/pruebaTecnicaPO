@@ -1,18 +1,17 @@
 import { User } from 'src/app/interfaces/user.interface';
 
 export interface UsersState {
-  loading: boolean;
   users: ReadonlyArray<User>;
-  error: any;
-  errorAdd: any;
-  errorUpdate: any;
-  errorDelete: any;
+  // estado de carga
+  loading: boolean;
   loadingAdd: boolean;
   loadingUpdate: boolean;
   loadingDelete: boolean;
+  // para paginador
   currentPage: number;
-  totalPages: number;
   totalItems: number;
   pageSize: number;
-  // users: Array<User>;
+  // filtros
+  filterNameOrLast: string;
+  filterRol: string;
 }

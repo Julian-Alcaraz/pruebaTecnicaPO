@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable, of } from 'rxjs';
+import { concatMap, delay, Observable, of, throwError } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { User } from '../interfaces/user.interface';
 export class UsersService {
   private jsonUrl = '../../assets/mocks/users.json'; // Ruta del archivo JSON
   id = 20;
+  failFlag = false;
   constructor(private http: HttpClient) {}
 
   // Método para obtener los datos
@@ -18,12 +19,35 @@ export class UsersService {
 
   addUser(user: User): Observable<any> {
     ++this.id;
-    return of({ ...user, id: this.id }).pipe(delay(2000));
+    if (this.failFlag) {
+      return of(null).pipe(
+        delay(2000),
+        concatMap(() => throwError(new Error('Simulated server error'))),
+      );
+    } else {
+      return of({ ...user, id: this.id }).pipe(delay(2000));
+    }
   }
+
   updateUser(user: User): Observable<any> {
-    return of(user).pipe(delay(2000));
+    if (this.failFlag) {
+      return of(null).pipe(
+        delay(2000),
+        concatMap(() => throwError(new Error('Simulated server error'))),
+      );
+    } else {
+      return of(user).pipe(delay(2000));
+    }
   }
+
   deleteUser(userId: number): Observable<any> {
-    return of(userId).pipe(delay(2000));
+    if (this.failFlag) {
+      return of(null).pipe(
+        delay(2000),
+        concatMap(() => throwError(new Error('Simulated server error'))),
+      );
+    } else {
+      return of(userId).pipe(delay(2000));
+    }
   }
 }

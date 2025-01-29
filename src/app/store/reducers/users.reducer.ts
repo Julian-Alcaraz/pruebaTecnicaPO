@@ -4,17 +4,14 @@ import * as UserActions from '../actions/users.actions';
 export const initialState: UsersState = {
   loading: false,
   users: [],
-  error: null,
-  errorAdd: null,
-  errorUpdate: null,
-  errorDelete: null,
   loadingAdd: false,
   loadingDelete: false,
   loadingUpdate: false,
   currentPage: 1,
   pageSize: 10,
-  totalPages: 1,
   totalItems: 0,
+  filterNameOrLast: '',
+  filterRol: '',
 };
 
 export const usersReducer = createReducer(
@@ -24,7 +21,7 @@ export const usersReducer = createReducer(
     return { ...state, loading: true };
   }),
   on(UserActions.loadedUsers, (state, { /* props que se mandan */ users }) => {
-    return { ...state, loading: false, users, totalItems: users.length, totalPages: Math.ceil(users.length / state.pageSize) };
+    return { ...state, loading: false, users, totalItems: users.length };
   }),
   // Add
   on(UserActions.addUser, (state, { user }) => {
@@ -32,7 +29,7 @@ export const usersReducer = createReducer(
   }),
   on(UserActions.addedUser, (state, { user }) => {
     const newList = [...state.users, user];
-    return { ...state, users: newList, loadingAdd: false, totalItems: newList.length, totalPages: Math.ceil(newList.length / state.pageSize) };
+    return { ...state, users: newList, loadingAdd: false, totalItems: newList.length };
   }),
   // Delete
   on(UserActions.deleteUser, (state, { userId }) => {
@@ -40,7 +37,7 @@ export const usersReducer = createReducer(
   }),
   on(UserActions.deletedUser, (state, { userId }) => {
     const newList = state.users.filter((elem) => elem.id != userId);
-    return { ...state, users: newList, loadingDelete: false, totalItems: newList.length, totalPages: Math.ceil(newList.length / state.pageSize) };
+    return { ...state, users: newList, loadingDelete: false, totalItems: newList.length };
   }),
   // Update
   on(UserActions.updateUser, (state, { user }) => {
@@ -61,21 +58,26 @@ export const usersReducer = createReducer(
   on(UserActions.loadedUsersFailure, (state, { error }) => ({
     ...state,
     loading: false,
-    error,
   })),
   on(UserActions.addUserFailure, (state, { error }) => ({
     ...state,
     loadingAdd: false,
-    errorAdd: error,
   })),
   on(UserActions.deleteUserFailure, (state, { error }) => ({
     ...state,
     loadingDelete: false,
-    errorDelete: error,
   })),
   on(UserActions.updateUserFailure, (state, { error }) => ({
     ...state,
     loadingUpdate: false,
-    errorUpdate: error,
   })),
+
+  on(UserActions.filterUsers, (state, { nameFilter, rolFilter }) => {
+    return {
+      ...state,
+      filterNameOrLast: nameFilter,
+      filterRol: rolFilter,
+      currentPage: 1,
+    };
+  }),
 );

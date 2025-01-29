@@ -1,17 +1,33 @@
 <div *ngIf="loading$ | async; else loaded">cargado...</div>
 
 <ng-template #loaded>
+  <div>
+    <!-- llevar a componente el filtro -->
+    <h3>Filters</h3>
+    <!-- [control]="inputControl('email')" -->
+    <app-input name="filter" label="Filters" placeholder="Nombre o apellido"></app-input>
+    <app-select name="rol" label="User Rol" [options]="roles"></app-select>
+    <button type="button" (click)="filterList()">Filtrar</button>
+    <button type="button" (click)="clean()">Clean</button>
+  </div>
+
   <div *ngIf="(users$ | async | json).length > 0; else noUsers">
     <div *ngFor="let user of users$ | async; let i = index">
-      {{ i }}:{{ user.nombre }} id: @ {{ user.id }} @
+      <!-- componente para mostarar los usuarios  -->
+      {{ i }}:{{ user.nombre }} id: {{ user.id }}
       <button type="button" (click)="eliminar(user.id)">Eliminar</button>
       <button type="button" (click)="editar(user)">editar</button>
       <br />
     </div>
-    <button (click)="before()">anterior</button>
-    pagina: {{ currentPage$ | async }}
-    <button (click)="next()">siguiente</button>
-    cant pages: {{ totalPages$ | async }}
+    <!-- llevara componente el paginador -->
+    <div *ngIf="currentPage$ | async as currentPage">
+      <button (click)="before(currentPage)">Anterior</button>
+      Página: {{ currentPage }}
+      <div *ngIf="totalPages$ | async as totalPages">
+        <button (click)="next(currentPage, totalPages)">Siguiente</button>
+        Cantidad : {{ totalPages }}
+      </div>
+    </div>
   </div>
   <ng-template #noUsers>
     <div>no hay usuarios</div>

@@ -2,9 +2,10 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { CONSTANTS } from 'src/app/config/constants';
 import { User } from 'src/app/interfaces/user.interface';
 import { addUser, updateUser } from 'src/app/store/actions/users.actions';
-import { selectAddError, selectAddSuccess, selectLoadingUserAdd, selectLoadingUserUpdate, selectUpdateError, selectUpdateSuccess } from 'src/app/store/selectors/users.selector';
+import { selectLoadingUserAdd, selectLoadingUserUpdate } from 'src/app/store/selectors/users.selector';
 import { AppState } from 'src/app/store/state/app.state';
 // import * as UserActions from 'src/app/store/actions/users.actions';
 
@@ -25,22 +26,20 @@ export class UserFormComponent implements OnInit {
   public error$: Observable<any> = new Observable();
   public success$: Observable<any> = new Observable();
   private destroy$ = new Subject<void>();
+  roles: string[] = [];
   message: string = '';
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
+    this.roles = CONSTANTS.ROLES;
+  }
 
   ngOnInit() {
     if (this.editUser) {
       this.loading$ = this.store.select(selectLoadingUserUpdate).pipe(takeUntil(this.destroy$));
-      this.error$ = this.store.select(selectUpdateError).pipe(takeUntil(this.destroy$));
-      // this.success$ = this.store.select(selectUpdateSuccess).pipe(takeUntil(this.destroy$));
       this.userForm.patchValue(this.editUser);
     } else {
       this.loading$ = this.store.select(selectLoadingUserAdd).pipe(takeUntil(this.destroy$));
-      this.error$ = this.store.select(selectAddError).pipe(takeUntil(this.destroy$));
-      // this.success$ = this.store.select(selectAddSuccess).pipe(takeUntil(this.destroy$));
     }
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {

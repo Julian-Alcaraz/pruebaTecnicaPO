@@ -3,7 +3,7 @@
     <app-input name="nombre" label="Nombre" placeholder="Ej: Pepe" [control]="inputControl('nombre')"></app-input>
     <app-input name="apellido" label="Apellido" placeholder="Ej: Perez" [control]="inputControl('apellido')"></app-input>
     <app-input name="email" label="Email" placeholder="Ej: ejemplo@gmail.com" [control]="inputControl('email')"></app-input>
-    <app-select name="rol" label="User Rol" [control]="inputControl('rol')" [options]="['Admin', 'User']"></app-select>
+    <app-select name="rol" label="User Rol" [control]="inputControl('rol')" [options]="roles"></app-select>
   </div>
   <br />
   <button type="submit">Guardar</button>
