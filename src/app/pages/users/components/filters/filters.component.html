@@ -1,0 +1,9 @@
+<div *ngIf="!(loading$ | async)" class="filters">
+  <div class="row" style="align-items: center">
+    <h3 class="non-margin"><strong>FIltros: </strong></h3>
+    <app-input name="filter" placeholder="Nombre o apellido" [control]="inputControl('nombre')"></app-input>
+    <app-select name="rol" [options]="rols" [control]="inputControl('rol')"></app-select>
+    <button type="button" class="button new-button" style="margin-right: 10px" (click)="filterList()">Aplicar</button>
+    <button type="button" class="button clean-button" (click)="clean()">Limpiar</button>
+  </div>
+</div>

@@ -74,7 +74,7 @@
     "nombre": "Miguel",
     "apellido": "Ruiz",
     "email": "miguel.ruiz@example.com",
-    "rol": "admin"
+    "rol": "Other"
   },
   {
     "id": 12,
@@ -95,21 +95,21 @@
     "nombre": "Patricia",
     "apellido": "Álvarez",
     "email": "patricia.alvarez@example.com",
-    "rol": "admin"
+    "rol": ""
   },
   {
     "id": 15,
     "nombre": "Fernando",
     "apellido": "Morales",
     "email": "fernando.morales@example.com",
-    "rol": "user"
+    "rol": ""
   },
   {
     "id": 16,
     "nombre": "Isabel",
     "apellido": "Ortega",
     "email": "isabel.ortega@example.com",
-    "rol": "user"
+    "rol": "Other"
   },
   {
     "id": 17,

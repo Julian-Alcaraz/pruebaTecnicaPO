@@ -1,14 +1,6 @@
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.row > * {
-  margin: 0px 10px;
-}
-.errorMessage {
-  color: red;
-}
-.successMessage {
-  color: green;
+.form {
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin: 0 10%;
+  padding: 20px;
 }

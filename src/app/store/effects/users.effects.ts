@@ -64,7 +64,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.addedUser),
         map((action) => {
-          this.showSnackBar('User added successfully', 'success');
+          this.showSnackBar('User added successfully', 'alert-success');
         }),
       ),
     { dispatch: false },
@@ -75,7 +75,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.deletedUser),
         map((action) => {
-          this.showSnackBar('User deleted successfully', 'success');
+          this.showSnackBar('User deleted successfully', 'alert-success');
         }),
       ),
     { dispatch: false },
@@ -86,7 +86,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.updateUserSuccess),
         map(() => {
-          this.showSnackBar('User updated successfully', 'success');
+          this.showSnackBar('User updated successfully', 'alert-success');
         }),
       ),
     { dispatch: false },
@@ -98,7 +98,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.addUserFailure),
         map((action) => {
-          this.showSnackBar('User add fail: ' + action.error.message, 'error');
+          this.showSnackBar('User add fail: ' + action.error.message, 'alert-error');
         }),
       ),
     { dispatch: false },
@@ -110,7 +110,7 @@ export class UsersEffects {
         ofType(UserActions.deleteUserFailure),
         map((action) => {
           console.log(action);
-          this.showSnackBar('User deleted fail: ' + action.error.message, 'error');
+          this.showSnackBar('User deleted fail: ' + action.error.message, 'alert-error');
         }),
       ),
     { dispatch: false },
@@ -121,7 +121,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.updateUserFailure),
         map((action) => {
-          this.showSnackBar('User updated fail: ' + action.error.message, 'error');
+          this.showSnackBar('User updated fail: ' + action.error.message, 'alert-error');
         }),
       ),
     { dispatch: false },
@@ -132,7 +132,7 @@ export class UsersEffects {
       this.actions$.pipe(
         ofType(UserActions.loadedUsersFailure),
         map((action) => {
-          this.showSnackBar('User load fail: ' + action.error.message, 'error');
+          this.showSnackBar('User load fail: ' + action.error.message, 'alert-error');
         }),
       ),
     { dispatch: false },
@@ -141,8 +141,9 @@ export class UsersEffects {
   showSnackBar(msj: string, type: string) {
     this.snackBar.openFromComponent(NotificationComponent, {
       data: [msj],
-      duration: 3000,
-      panelClass: ['custom-snackbar-container', type],
+      duration: 2500,
+      panelClass: ['alert', type],
+      verticalPosition: 'top',
     });
   }
 }

@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">{{ user.nombre }} {{ user.apellido }}</div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">{{ user.email }}</p>
+    <p class="card-text">Rol: {{ user.rol ? (user.rol | uppercase) : '--' }}</p>
+    <button (click)="delete(user.id)" class="button delete-button" [disabled]="loadingDelete$ | async">
+      Eliminar <span *ngIf="(loadingDelete$ | async) && deleting" class="center" style="margin: 3px"> <app-spinner [width]="10"></app-spinner> </span>
+    </button>
+    <button (click)="edit(user)" class="button edit-button">Editar</button>
+  </div>
+</div>

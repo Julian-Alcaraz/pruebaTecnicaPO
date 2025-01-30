@@ -1,26 +1,81 @@
 .body {
   margin: 0px;
   padding: 0px;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(8deg, rgba(255, 255, 255, 1) 40%, rgba(255, 0, 0, 1) 200%);
+  background-attachment: fixed; /* Fija el fondo para evitar duplicación */
+  background-size: cover;
 }
 
-.custom-snackbar-container {
-  position: fixed !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 10%;
-  height: 80px;
+.non-margin {
+  margin: 0px !important;
+}
+.alert {
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.alert-error {
+  background-color: rgb(200, 42, 42) !important;
+  border: 1px solid rgb(163, 11, 11);
+}
+
+.alert-success {
+  background-color: rgb(28, 137, 28) !important;
+  border: 1px solid green;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.row > * {
+  margin: 0px 10px;
+}
+.button {
+  margin: 4px 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.new-button {
+  background-color: rgb(29, 154, 39);
+  border: 1px solid rgb(13, 96, 2);
+  color: white;
+}
+.clean-button {
+  background-color: rgb(52, 140, 213);
+  border: 1px solid rgb(0, 83, 161);
+  color: white;
+}
+
+.button:disabled {
+  background-color: rgb(187, 187, 187);
+  border: 1px solid rgb(56, 56, 56);
+  color: black;
+  cursor: auto;
+}
+.delete-button {
+  background-color: rgb(216, 64, 64);
+  border: 1px solid rgb(83, 0, 0);
+  color: white;
+}
+.edit-button {
+  background-color: rgb(232, 111, 4);
+  border: 1px solid rgb(171, 51, 0);
+  color: white;
+}
+.center {
+  display: flex;
   justify-content: center;
-  color: black !important;
-  text-align: center;
-}
-.success {
-  background-color: lightgreen !important;
-}
-
-.error {
-  background-color: lightcoral !important;
 }

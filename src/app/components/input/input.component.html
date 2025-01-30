@@ -1,5 +1,5 @@
-<label [for]="name" class="label">{{ label }}</label>
-<br />
+<label [for]="name" class="label" *ngIf="label">{{ label }}</label>
+<br *ngIf="label" />
 <input type="text" class="input" [id]="name" [placeholder]="placeholder" [formControl]="control" />
 <div *ngIf="hasError" class="error-text">
   <app-input-error [errors]="control.errors"></app-input-error>

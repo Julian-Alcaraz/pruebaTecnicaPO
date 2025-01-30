@@ -1,5 +1,5 @@
-<label [for]="name" class="label">{{ label }}</label>
-<br />
+<label [for]="name" class="label" *ngIf="label != ''">{{ label }}</label>
+<br *ngIf="label" />
 <select class="input" [name]="name" [id]="name" [formControl]="control">
   <option value="" disabled selected>Select one</option>
   <option *ngFor="let opt of options" [value]="opt.toLowerCase()">{{ opt }}</option>

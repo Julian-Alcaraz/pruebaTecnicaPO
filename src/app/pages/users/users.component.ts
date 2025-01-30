@@ -11,6 +11,7 @@ import { loadUsers } from 'src/app/store/actions/users.actions';
 export class UsersComponent {
   user: User | null = null;
   showForm: boolean = false;
+
   constructor(private store: Store<any>) {}
 
   ngOnInit() {

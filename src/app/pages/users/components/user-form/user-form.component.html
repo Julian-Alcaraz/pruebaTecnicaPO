@@ -1,20 +1,16 @@
-<form [formGroup]="userForm" (submit)="editUser ? editar() : agregar()">
-  <div class="row">
+<form [formGroup]="userForm" (submit)="editUser ? editar() : agregar()" class="form">
+  <div class="row" style="align-items: center">
     <app-input name="nombre" label="Nombre" placeholder="Ej: Pepe" [control]="inputControl('nombre')"></app-input>
     <app-input name="apellido" label="Apellido" placeholder="Ej: Perez" [control]="inputControl('apellido')"></app-input>
     <app-input name="email" label="Email" placeholder="Ej: ejemplo@gmail.com" [control]="inputControl('email')"></app-input>
-    <app-select name="rol" label="User Rol" [control]="inputControl('rol')" [options]="roles"></app-select>
+    <app-select name="rol" label="User Rol" [control]="inputControl('rol')" [options]="rols"></app-select>
+    <div>
+      <button type="submit" class="button" [disabled]="loading$ | async" [class]="editUser ? 'edit-button' : 'new-button'">{{ editUser ? 'Editar' : 'Guardar' }}</button>
+      <button type="button" style="margin-left: 10px" class="button clean-button" (click)="clean()">Limpiar</button>
+    </div>
+    <div *ngIf="loading$ | async" class="row">
+      <app-spinner [width]="15"></app-spinner>
+      cargando...
+    </div>
   </div>
-  <br />
-  <button type="submit">Guardar</button>
-  {{ loading$ | async }}
-  {{ message }}
-  <div *ngIf="message" [class]="(error$ | async) ? 'errorMessage' : 'successMessage'">{{ message }}</div>
-  <div *ngIf="error$ | async as error">
-    <p class="errorMessage">{{ error }}</p>
-  </div>
-  <div *ngIf="success$ | async">
-    <p class="successMessage">Usuario agregado/actualizado con éxito</p>
-  </div>
-  <div *ngIf="loading$ | async">cargando...</div>
 </form>

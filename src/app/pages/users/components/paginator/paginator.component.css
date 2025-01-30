@@ -1,0 +1,21 @@
+.end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 5px 10px;
+}
+.text {
+  font-size: larger;
+}
+.paginator-button {
+  cursor: pointer;
+  padding: 5px 8px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.paginator-button:disabled {
+  color: black;
+  background-color: gray;
+  cursor: auto;
+}

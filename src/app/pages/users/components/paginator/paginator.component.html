@@ -1,0 +1,9 @@
+<div *ngIf="currentPage$ | async as currentPage">
+  <div *ngIf="totalPages$ | async as totalPages" class="end">
+    <div class="row end">
+      <button (click)="before(currentPage)" class="paginator-button" [disabled]="currentPage == 1">< Anterior</button>
+      <span class="text"> Página: {{ currentPage }} de : {{ totalPages }} </span>
+      <button (click)="next(currentPage, totalPages)" class="paginator-button" [disabled]="currentPage === totalPages">Siguiente ></button>
+    </div>
+  </div>
+</div>

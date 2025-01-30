@@ -26,7 +26,12 @@ export const selectFilterUsers = createSelector(selectListUser, selectFilterNam,
     const apellido = user.apellido.toLowerCase();
     const nombre = user.nombre.toLowerCase();
     const matchesName = apellido.toLowerCase().includes(nameFilterL) || nombre.includes(nameFilterL);
-    const matchesRol = rolFilterL ? user.rol.toLowerCase() === rolFilterL : true;
+    let matchesRol;
+    if (rolFilterL === 'no rol') {
+      matchesRol = rolFilterL ? user.rol.toLowerCase() === '' : true;
+    } else {
+      matchesRol = rolFilterL ? user.rol.toLowerCase() === rolFilterL : true;
+    }
     return matchesName && matchesRol;
   });
   return filteredUsers;

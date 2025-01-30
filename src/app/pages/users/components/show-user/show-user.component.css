@@ -1,0 +1,30 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(253, 244, 244);
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid gray;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body h5 {
+  margin: 0;
+}
+
+.card-body p {
+  margin: 4px 0;
+}

@@ -1,35 +1,22 @@
-<div *ngIf="loading$ | async; else loaded">cargado...</div>
+<div *ngIf="loading$ | async; else loaded" class="center">
+  <div style="display: flex; flex-direction: column">
+    <span style="font-size: x-large; font-weight: 600; margin-bottom: 15px"> cargado... </span>
+    <div class="center">
+      <app-spinner [width]="60"></app-spinner>
+    </div>
+  </div>
+</div>
 
 <ng-template #loaded>
-  <div>
-    <!-- llevar a componente el filtro -->
-    <h3>Filters</h3>
-    <!-- [control]="inputControl('email')" -->
-    <app-input name="filter" label="Filters" placeholder="Nombre o apellido"></app-input>
-    <app-select name="rol" label="User Rol" [options]="roles"></app-select>
-    <button type="button" (click)="filterList()">Filtrar</button>
-    <button type="button" (click)="clean()">Clean</button>
-  </div>
-
-  <div *ngIf="(users$ | async | json).length > 0; else noUsers">
-    <div *ngFor="let user of users$ | async; let i = index">
-      <!-- componente para mostarar los usuarios  -->
-      {{ i }}:{{ user.nombre }} id: {{ user.id }}
-      <button type="button" (click)="eliminar(user.id)">Eliminar</button>
-      <button type="button" (click)="editar(user)">editar</button>
-      <br />
-    </div>
-    <!-- llevara componente el paginador -->
-    <div *ngIf="currentPage$ | async as currentPage">
-      <button (click)="before(currentPage)">Anterior</button>
-      Página: {{ currentPage }}
-      <div *ngIf="totalPages$ | async as totalPages">
-        <button (click)="next(currentPage, totalPages)">Siguiente</button>
-        Cantidad : {{ totalPages }}
+  <div *ngIf="(users$ | async)!.length > 0; else noUsers" class="list-box">
+    <div class="list">
+      <div *ngFor="let user of users$ | async; let i = index" class="item">
+        <app-show-user [user]="user" [index]="i" (editUser)="editUser.emit($event)"></app-show-user>
       </div>
     </div>
+    <app-paginator></app-paginator>
   </div>
   <ng-template #noUsers>
-    <div>no hay usuarios</div>
+    <div class="list-box no-user">No se encontraron usuarios.</div>
   </ng-template>
 </ng-template>
